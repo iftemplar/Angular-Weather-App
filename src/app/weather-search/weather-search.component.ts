@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
+import { detailedWeather, necessaryWeather } from '../weather.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-weather-search',
@@ -8,13 +10,24 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./weather-search.component.scss'],
 })
 export class WeatherSearchComponent implements OnInit {
+  weatherData?: necessaryWeather;
   weatherSubscription?: Subscription;
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.weatherSubscription = this.weatherService.fetchWeather().subscribe((data) => {
-      console.log(data);
-    });
+    this.weatherSubscription = this.weatherService
+      .fetchWeather()
+      .pipe(
+        map((data: detailedWeather) => {
+          return { name: data.name, temp: data.main.temp };
+        })
+      )
+      .subscribe((mappedData: necessaryWeather) => {
+        console.log(mappedData);
+        this.weatherData = mappedData;
+      });
   }
 }
+
+// *ngIf loader while data is processing
