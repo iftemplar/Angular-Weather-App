@@ -7,6 +7,14 @@ export interface mainWeather {
   temp_min: number;
 }
 
+export interface weatherInfo {
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
+}
+
+
 export interface detailedWeather {
   base: string;
   clouds: Object;
@@ -19,11 +27,12 @@ export interface detailedWeather {
   sys: Object;
   timezone: number;
   visibility: number;
-  weather: Array<Object>;
+  weather: Array<weatherInfo>;
   wind: Object;
 }
 
 export interface necessaryWeather {
   name: string;
   temp: number;
+  mainWeather: string;
 }
