@@ -15,9 +15,12 @@ export class WeatherSearchComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  searchWeather(city: string) {
+    console.log(city);
     this.weatherSubscription = this.weatherService
-      .fetchWeather()
+      .fetchWeather(city)
       .pipe(
         map((data: detailedWeather) => {
           return { name: data.name, temp: data.main.temp };
