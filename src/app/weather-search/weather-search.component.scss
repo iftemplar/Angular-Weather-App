@@ -1,3 +1,33 @@
+.content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
 .input-desc {
   margin-bottom: 5px;
+}
+
+header {
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  position: fixed;
+  z-index: 2;
+}
+
+.container {
+  min-height: 300px;
+}
+
+.video {
+  width: 100%;
 }
