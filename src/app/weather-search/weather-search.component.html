@@ -2,13 +2,16 @@
   <div class="row justify-content-center">
     <div class="col-12">
       <p class="input-desc">Type a location and press Search</p>
-
     </div>
     <div class="col-12">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="for example: Madrid" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        <input type="text" class="form-control" placeholder="for example: Madrid"
+               aria-label="Recipient's username" aria-describedby="button-addon2"
+               #weather>
+        <button class="btn" type="button" id="button-addon2"
+                (click)="searchWeather(weather.value)" )>Search</button>
       </div>
+<Button>123</Button>
     </div>
   </div>
 </div>
