@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
 import { detailedWeather, necessaryWeather } from '../weather.model';
@@ -18,12 +18,15 @@ export class WeatherSearchComponent implements OnInit {
   ngOnInit(): void {}
 
   searchWeather(city: string) {
-    console.log(city);
     this.weatherSubscription = this.weatherService
       .fetchWeather(city)
       .pipe(
         map((data: detailedWeather) => {
-          return { name: data.name, temp: data.main.temp };
+          console.dir(data);
+          return { name: data.name,
+                   temp: data.main.temp,
+                   mainWeather: data.weather[0].main
+                 };
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
@@ -31,6 +34,15 @@ export class WeatherSearchComponent implements OnInit {
         this.weatherData = mappedData;
       });
   }
+
+  ngOnDestroy() {
+    if(this.weatherSubscription) {
+      this.weatherSubscription.unsubscribe();
+    }
+  }
+
 }
+
+
 
 // *ngIf loader while data is processing
