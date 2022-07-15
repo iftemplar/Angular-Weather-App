@@ -10,7 +10,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./weather-search.component.scss'],
 })
 export class WeatherSearchComponent implements OnInit {
-  weatherData?: necessaryWeather;
+  weatherData: necessaryWeather = { // initial data needed to allow showing default video BG
+    name: '',
+    temp: 0,
+    mainWeather: ''
+  };
   weatherSubscription?: Subscription;
 
   constructor(private weatherService: WeatherService) {}
@@ -35,7 +39,7 @@ export class WeatherSearchComponent implements OnInit {
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if(this.weatherSubscription) {
       this.weatherSubscription.unsubscribe();
     }
