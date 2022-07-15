@@ -1,7 +1,17 @@
 <header>Angular Weather App</header>
-<video autoplay muted loop class="video">
-  <source src="../../assets/clear.mp4" type="video/mp4">
-</video>
+
+<div *ngIf="weatherData.mainWeather === 'Clear'; else elseBlock">
+  <video autoplay muted loop class="video">
+    <source src="../../assets/clear.mp4" type="video/mp4">
+  </video>
+</div>
+
+<ng-template #elseBlock>
+  <video autoplay muted loop class="video">
+    <source src="../../assets/default.mp4" type="video/mp4">
+  </video>
+</ng-template>
+
 
 <section class="content">
   <div class="container">
