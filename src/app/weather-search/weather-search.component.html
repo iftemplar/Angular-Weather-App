@@ -27,7 +27,7 @@
           <button class="btn btn-primary" type="button" id="button-addon2"
                   (click)="searchWeather(weather.value)" >Search</button>
         </div>
-        <div class='row' *ngIf='weatherData'>
+        <div class='row' *ngIf='weatherData.name !== ""'>
           <div class="col-12">
             <h2>Temperature in {{weatherData.name}} is {{weatherData.temp | number: '1.0-0' }}°C</h2>
           </div>
