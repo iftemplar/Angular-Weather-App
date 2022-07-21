@@ -23,11 +23,18 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="for example: Madrid"
                  aria-label="Recipient's username" aria-describedby="button-addon2"
-                 #weather (keyup.enter)="searchWeather(weather.value)" value='Madrid'>
+                 #weather (keyup.enter)="searchWeather(weather.value)">
           <button class="btn btn-primary" type="button" id="button-addon2"
                   (click)="searchWeather(weather.value)" >Search</button>
         </div>
-        <div class='row' *ngIf='weatherData'>
+        <section class="city-list">
+          <button *ngFor="let city of cities"
+                  class="btn btn-light btn-city"
+                  (click)="searchWeather(city)">{{city}}
+          </button>
+        </section>
+
+        <div class='row' *ngIf='weatherData.name !== ""'>
           <div class="col-12">
             <h2>Temperature in {{weatherData.name}} is {{weatherData.temp | number: '1.0-0' }}°C</h2>
           </div>

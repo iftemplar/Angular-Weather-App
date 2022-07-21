@@ -10,12 +10,15 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./weather-search.component.scss'],
 })
 export class WeatherSearchComponent implements OnInit {
-  weatherData: necessaryWeather = { // initial data needed to allow showing default video BG
+  weatherData: necessaryWeather = {
+    // initial data needed to allow showing default video BG
     name: '',
     temp: 0,
-    mainWeather: ''
+    mainWeather: '',
   };
   weatherSubscription?: Subscription;
+
+  cities = ['Puerto Natales', 'Madrid', 'Lviv', 'Denver', 'Cape Town', 'Sydney', 'Nuuk', 'Tokyo'];
 
   constructor(private weatherService: WeatherService) {}
 
@@ -27,10 +30,7 @@ export class WeatherSearchComponent implements OnInit {
       .pipe(
         map((data: detailedWeather) => {
           console.dir(data);
-          return { name: data.name,
-                   temp: data.main.temp,
-                   mainWeather: data.weather[0].main
-                 };
+          return { name: data.name, temp: data.main.temp, mainWeather: data.weather[0].main };
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
@@ -40,13 +40,10 @@ export class WeatherSearchComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if(this.weatherSubscription) {
+    if (this.weatherSubscription) {
       this.weatherSubscription.unsubscribe();
     }
   }
-
 }
-
-
 
 // *ngIf loader while data is processing
