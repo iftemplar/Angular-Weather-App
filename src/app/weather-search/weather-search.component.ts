@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
 import { detailedWeather, necessaryWeather } from '../weather.model';
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './weather-search.component.html',
   styleUrls: ['./weather-search.component.scss'],
 })
-export class WeatherSearchComponent implements OnInit {
+export class WeatherSearchComponent {
   weatherData: necessaryWeather = {
     // initial data needed to allow showing default video BG
     name: '',
@@ -20,22 +20,31 @@ export class WeatherSearchComponent implements OnInit {
 
   cities = ['Puerto Natales', 'Madrid', 'Lviv', 'Denver', 'Cape Town', 'Sydney', 'Nuuk', 'Tokyo'];
 
-  constructor(private weatherService: WeatherService) {}
+  weatherBackgrounds = new Map([
+    ['Clear', '../../assets/clear.mp4'],
+    ['Clouds', '../../assets/clouds.mp4'],
+    ['Fog', '../../assets/fog.mp4'],
+    ['Rain', '../../assets/rain.mp4'],
+    ['Snow', '../../assets/snow.mp4'],
+  ]);
 
-  ngOnInit(): void {}
+  currentBg: string | undefined = '../../assets/default.mp4';
+
+  constructor(private weatherService: WeatherService) {}
 
   searchWeather(city: string) {
     this.weatherSubscription = this.weatherService
       .fetchWeather(city)
       .pipe(
         map((data: detailedWeather) => {
-          console.dir(data);
+          console.dir('data', data);
           return { name: data.name, temp: data.main.temp, mainWeather: data.weather[0].main };
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
-        console.log(mappedData);
+        console.log('mappedData', mappedData);
         this.weatherData = mappedData;
+        this.currentBg = this.weatherBackgrounds.get(this.weatherData.mainWeather);
       });
   }
 
@@ -45,5 +54,3 @@ export class WeatherSearchComponent implements OnInit {
     }
   }
 }
-
-// *ngIf loader while data is processing
