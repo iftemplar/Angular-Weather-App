@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
 import { detailedWeather, necessaryWeather } from '../weather.model';
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './weather-search.component.html',
   styleUrls: ['./weather-search.component.scss'],
 })
-export class WeatherSearchComponent {
+export class WeatherSearchComponent implements OnDestroy {
   weatherData: necessaryWeather = {
     // initial data needed to allow showing default video BG
     name: '',
@@ -28,7 +28,7 @@ export class WeatherSearchComponent {
     ['Snow', '../../assets/snow.mp4'],
   ]);
 
-  currentBg: string | undefined = '../../assets/default.mp4';
+  @ViewChild('video') videoRef!: ElementRef;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -44,7 +44,8 @@ export class WeatherSearchComponent {
       .subscribe((mappedData: necessaryWeather) => {
         console.log('mappedData', mappedData);
         this.weatherData = mappedData;
-        this.currentBg = this.weatherBackgrounds.get(this.weatherData.mainWeather);
+        this.videoRef.nativeElement.src = this.weatherBackgrounds.get(this.weatherData.mainWeather);
+        this.videoRef.nativeElement.load();
       });
   }
 

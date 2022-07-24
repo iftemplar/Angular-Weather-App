@@ -1,26 +1,16 @@
 <header>Angular Weather App</header>
 
-<div *ngIf="weatherData.mainWeather else elseBlock">
-<!--<div>-->
-  <video autoplay muted loop class="video">
-    <source src="{{currentBg}}" type="video/mp4">
-  </video>
-</div>
-
-
-<ng-template #elseBlock>
-  <video autoplay muted loop class="video">
+<div>
+  <video autoplay muted loop class="video" #video>
     <source src="../../assets/default.mp4" type="video/mp4">
   </video>
-</ng-template>
-
+</div>
 
 <section class="content">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12">
         <p class="input-desc">Type a location and press Search</p>
-        <p class="input-desc">Video on UI: {{currentBg}}</p>
       </div>
       <div class="col-12">
         <div class="input-group mb-3">
@@ -28,7 +18,7 @@
                  aria-label="Recipient's username" aria-describedby="button-addon2"
                  #weather (keyup.enter)="searchWeather(weather.value)">
           <button class="btn btn-primary" type="button" id="button-addon2"
-                  (click)="searchWeather(weather.value)" >Search</button>
+                  (click)="searchWeather(weather.value)">Search</button>
         </div>
         <section class="city-list">
           <button *ngFor="let city of cities"
