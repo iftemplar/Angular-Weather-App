@@ -42,12 +42,12 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
       .fetchWeather(city)
       .pipe(
         map((data: detailedWeather) => {
-          console.dir('data', data);
+          // console.dir('data', data);
           return { name: data.name, temp: data.main.temp, mainWeather: data.weather[0].main };
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
-        console.log('mappedData', mappedData);
+        // console.log('mappedData', mappedData);
         this.weatherData = mappedData;
         this.videoRef.nativeElement.src = this.weatherBackgrounds.get(this.weatherData.mainWeather);
         this.videoRef.nativeElement.load();
