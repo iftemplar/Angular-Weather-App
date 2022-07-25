@@ -17,11 +17,60 @@
 
 header {
   width: 100%;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   padding: 10px 20px;
   position: fixed;
   z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .app-name {
+    font-size: 30px;
+  }
+
+  .contact-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .socials-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    li {
+      list-style: none;
+    }
+
+    .socials {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      margin-right: 20px;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      &.socials-git{
+        background: url(../../assets/github.png);
+        background-size: cover;
+      }
+      &.socials-fb{
+        background: url(../../assets/facebook.png);
+        background-size: cover;
+      }
+      &.socials-insta{
+        background: url(../../assets/instagram.png);
+        background-size: cover;
+      }
+      &.socials-linkedin{
+        background: url(../../assets/linkedin.png);
+        background-size: cover;
+      }
+    }
+  }
 }
 
 .container {
