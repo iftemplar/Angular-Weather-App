@@ -21,10 +21,11 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
   cities = ['Puerto Natales', 'Madrid', 'Lviv', 'Denver', 'Cape Town', 'Sydney', 'Nuuk', 'Tokyo'];
 
   weatherBackgrounds = new Map([
-    ['Sunny', '../../assets/clear.mp4'],
-    ['Mostly Sunny', '../../assets/clear.mp4'],
-    ['Clear', '../../assets/clear.mp4'],
-    ['Mostly Clear', '../../assets/clear.mp4'],
+    ['default', '../../assets/default.mp4'],
+    // ['Sunny', '../../assets/clear.mp4'],
+    // ['Mostly Sunny', '../../assets/clear.mp4'],
+    // ['Clear', '../../assets/clear.mp4'],
+    // ['Mostly Clear', '../../assets/clear.mp4'],
     ['Cloudy', '../../assets/clouds.mp4'],
     ['Partly Cloudy', '../../assets/clouds.mp4'],
     ['Breezy', '../../assets/rain.mp4'],
@@ -59,8 +60,14 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
       .subscribe((mappedData: necessaryWeather) => {
         console.log('mappedData', mappedData);
         this.weatherData = mappedData;
-        this.videoRef.nativeElement.src = this.weatherBackgrounds.get(this.weatherData.mainWeather);
-        this.videoRef.nativeElement.load();
+        if (this.weatherBackgrounds.has(this.weatherData.mainWeather)) {
+          this.videoRef.nativeElement.src = this.weatherBackgrounds.get(
+            this.weatherData.mainWeather
+          );
+          this.videoRef.nativeElement.load();
+        } else {
+          this.videoRef.nativeElement.src = this.weatherBackgrounds.get('default');
+        }
       });
   }
 
