@@ -28,6 +28,7 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
     ['Mostly Clear', '../../assets/clear.mp4'],
     ['Cloudy', '../../assets/clouds.mp4'],
     ['Partly Cloudy', '../../assets/part-clouds.mp4'],
+    ['Mostly Cloudy', '../../assets/part-clouds.mp4'],
     ['Breezy', '../../assets/breezy.mp4'],
     ['Showers', '../../assets/rain.mp4'],
 
