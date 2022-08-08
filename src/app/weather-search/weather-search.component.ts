@@ -50,7 +50,7 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
       .fetchWeather(city)
       .pipe(
         map((data: mainWeather) => {
-          console.log(data);
+          // console.log(data);
           return {
             name: city,
             temp: data.current_observation.condition.temperature,
@@ -59,7 +59,7 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
-        console.log('mappedData', mappedData);
+        // console.log('mappedData', mappedData);
         this.weatherData = mappedData;
         if (this.weatherBackgrounds.has(this.weatherData.mainWeather)) {
           this.videoRef.nativeElement.src = this.weatherBackgrounds.get(
