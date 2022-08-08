@@ -9,16 +9,13 @@ import { detailedWeather } from './weather.model';
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
-  fetchWeather(city: string): Observable<detailedWeather> {
-    return this.http.get<detailedWeather>(
-      'https://community-open-weather-map.p.rapidapi.com/weather',
-      {
-        headers: new HttpHeaders({
-          'X-RapidAPI-Key': '621243177bmsh540d7449a705dffp121eecjsn4222284fe597',
-          'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
-        }),
-        params: { q: city, units: 'metric' },
-      }
-    );
+  fetchWeather(city: string): Observable<any> {
+    return this.http.get('https://yahoo-weather5.p.rapidapi.com/weather', {
+      headers: new HttpHeaders({
+        'X-RapidAPI-Key': '621243177bmsh540d7449a705dffp121eecjsn4222284fe597',
+        'X-RapidAPI-Host': 'yahoo-weather5.p.rapidapi.com',
+      }),
+      params: { location: city, u: 'c' },
+    });
   }
 }

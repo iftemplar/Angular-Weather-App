@@ -1,34 +1,21 @@
 export interface mainWeather {
-  feels_like: number;
-  humidity: number;
-  pressure: number;
-  temp: number;
-  temp_max: number;
-  temp_min: number;
+  current_observation: detailedWeather;
+  forecasts: Array<any>;
+  location: Object;
 }
-
-export interface weatherInfo {
-  description: string;
-  icon: string;
-  id: number;
-  main: string;
-}
-
 
 export interface detailedWeather {
-  base: string;
-  clouds: Object;
-  cod: number;
-  coord: Object;
-  dt: number;
-  id: number;
-  main: mainWeather;
-  name: string;
-  sys: Object;
-  timezone: number;
-  visibility: number;
-  weather: Array<weatherInfo>;
+  astronomy: Object;
+  atmosphere: Object;
+  condition: conditionWeather;
+  pubDate: number;
   wind: Object;
+}
+
+export interface conditionWeather {
+  code: number;
+  text: string;
+  temperature: number;
 }
 
 export interface necessaryWeather {

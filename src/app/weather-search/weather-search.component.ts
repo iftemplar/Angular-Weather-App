@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Subscription } from 'rxjs';
-import { detailedWeather, necessaryWeather } from '../weather.model';
+import { mainWeather, necessaryWeather } from '../weather.model';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -21,10 +21,16 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
   cities = ['Puerto Natales', 'Madrid', 'Lviv', 'Denver', 'Cape Town', 'Sydney', 'Nuuk', 'Tokyo'];
 
   weatherBackgrounds = new Map([
+    ['Sunny', '../../assets/clear.mp4'],
+    ['Mostly Sunny', '../../assets/clear.mp4'],
     ['Clear', '../../assets/clear.mp4'],
-    ['Clouds', '../../assets/clouds.mp4'],
+    ['Mostly Clear', '../../assets/clear.mp4'],
+    ['Cloudy', '../../assets/clouds.mp4'],
+    ['Partly Cloudy', '../../assets/clouds.mp4'],
+    ['Breezy', '../../assets/rain.mp4'],
+    ['Showers', '../../assets/rain.mp4'],
+
     ['Fog', '../../assets/fog.mp4'],
-    ['Rain', '../../assets/rain.mp4'],
     ['Snow', '../../assets/snow.mp4'],
   ]);
 
@@ -41,13 +47,17 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
     this.weatherSubscription = this.weatherService
       .fetchWeather(city)
       .pipe(
-        map((data: detailedWeather) => {
-          // console.dir('data', data);
-          return { name: data.name, temp: data.main.temp, mainWeather: data.weather[0].main };
+        map((data: mainWeather) => {
+          console.log(data);
+          return {
+            name: city,
+            temp: data.current_observation.condition.temperature,
+            mainWeather: data.current_observation.condition.text,
+          };
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
-        // console.log('mappedData', mappedData);
+        console.log('mappedData', mappedData);
         this.weatherData = mappedData;
         this.videoRef.nativeElement.src = this.weatherBackgrounds.get(this.weatherData.mainWeather);
         this.videoRef.nativeElement.load();
