@@ -22,13 +22,13 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
 
   weatherBackgrounds = new Map([
     ['default', '../../assets/default.mp4'],
-    // ['Sunny', '../../assets/clear.mp4'],
-    // ['Mostly Sunny', '../../assets/clear.mp4'],
-    // ['Clear', '../../assets/clear.mp4'],
-    // ['Mostly Clear', '../../assets/clear.mp4'],
+    ['Sunny', '../../assets/sunny.mp4'],
+    ['Mostly Sunny', '../../assets/clear.mp4'],
+    ['Clear', '../../assets/clear.mp4'],
+    ['Mostly Clear', '../../assets/clear.mp4'],
     ['Cloudy', '../../assets/clouds.mp4'],
-    ['Partly Cloudy', '../../assets/clouds.mp4'],
-    ['Breezy', '../../assets/rain.mp4'],
+    ['Partly Cloudy', '../../assets/part-clouds.mp4'],
+    ['Breezy', '../../assets/breezy.mp4'],
     ['Showers', '../../assets/rain.mp4'],
 
     ['Fog', '../../assets/fog.mp4'],
