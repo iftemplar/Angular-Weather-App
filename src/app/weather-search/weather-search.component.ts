@@ -21,13 +21,15 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
   cities = ['Puerto Natales', 'Madrid', 'Lviv', 'Denver', 'Cape Town', 'Sydney', 'Nuuk', 'Tokyo'];
 
   weatherBackgrounds = new Map([
-    ['Sunny', '../../assets/clear.mp4'],
+    ['default', '../../assets/default.mp4'],
+    ['Sunny', '../../assets/sunny.mp4'],
     ['Mostly Sunny', '../../assets/clear.mp4'],
     ['Clear', '../../assets/clear.mp4'],
     ['Mostly Clear', '../../assets/clear.mp4'],
     ['Cloudy', '../../assets/clouds.mp4'],
-    ['Partly Cloudy', '../../assets/clouds.mp4'],
-    ['Breezy', '../../assets/rain.mp4'],
+    ['Partly Cloudy', '../../assets/part-clouds.mp4'],
+    ['Mostly Cloudy', '../../assets/part-clouds.mp4'],
+    ['Breezy', '../../assets/breezy.mp4'],
     ['Showers', '../../assets/rain.mp4'],
 
     ['Fog', '../../assets/fog.mp4'],
@@ -48,7 +50,7 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
       .fetchWeather(city)
       .pipe(
         map((data: mainWeather) => {
-          console.log(data);
+          // console.log(data);
           return {
             name: city,
             temp: data.current_observation.condition.temperature,
@@ -57,10 +59,16 @@ export class WeatherSearchComponent implements OnDestroy, AfterViewInit {
         })
       )
       .subscribe((mappedData: necessaryWeather) => {
-        console.log('mappedData', mappedData);
+        // console.log('mappedData', mappedData);
         this.weatherData = mappedData;
-        this.videoRef.nativeElement.src = this.weatherBackgrounds.get(this.weatherData.mainWeather);
-        this.videoRef.nativeElement.load();
+        if (this.weatherBackgrounds.has(this.weatherData.mainWeather)) {
+          this.videoRef.nativeElement.src = this.weatherBackgrounds.get(
+            this.weatherData.mainWeather
+          );
+          this.videoRef.nativeElement.load();
+        } else {
+          this.videoRef.nativeElement.src = this.weatherBackgrounds.get('default');
+        }
       });
   }
 

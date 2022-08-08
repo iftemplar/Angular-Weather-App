@@ -40,7 +40,7 @@
 
         <div class='row' *ngIf='weatherData.name !== ""'>
           <div class="col-12">
-            <h2>Weather in {{weatherData.name}} is {{weatherData.temp | number: '1.0-0' }}°C</h2>
+            <h2 class="weather-result">Weather in {{weatherData.name}} is {{weatherData.mainWeather | lowercase }}, {{weatherData.temp | number: '1.0-0' }}°C</h2>
           </div>
         </div>
       </div>
